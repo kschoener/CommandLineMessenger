@@ -1,0 +1,2 @@
+This allows a bash script to be executed:
+chmod u+x program_name
