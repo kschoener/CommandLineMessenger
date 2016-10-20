@@ -9,9 +9,7 @@ commands = [
     'conv',
     'open',
     'refresh',
-    'r',
     'send',
-    's'
 ]
 
 def main():
