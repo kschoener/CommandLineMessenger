@@ -46,8 +46,8 @@ headers = {
 def main():
     global username
     global password
-    username = 'kschoener6'
-    password = 'password67'
+    username = 'nunya'
+    password = 'business'
 #enddef main
 
 def getOpenConversations():
@@ -84,7 +84,7 @@ def getPassword():
 #     # print(str(html))
 #
 #     # headers = {'user-agent':'Mozilla/5.0'}
-#     values = {"email":"kschoener6@yahoo.com","password":"password67"}
+#     values = {"email":"nunya@business.com","password":"tryme"}
 #     # pretend to be a chrome 47 browser on a windows 10 machine
 #     # headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"}
 #     # encode values for the url
