@@ -52,7 +52,7 @@ def main():
 
 def getOpenConversations():
     conversations = []
-    path = 'data/conversations'
+    path = 'dummydata/conversations'
     for (dirpath, dirnames, filenames) in os.walk(path):
         for filename in filenames:
             conversations.append(filename.split('.')[0].replace('_',' '))
@@ -60,7 +60,7 @@ def getOpenConversations():
 #enddef getOpenConversations
 
 def getConversation(conversationName):
-    path = 'data/conversations/'+conversationName.replace(' ','_')+'.json'
+    path = 'dummydata/conversations/'+conversationName.replace(' ','_')+'.json'
     data = None
     with open(path, 'r') as handle:
         data = json.loads(handle.read().strip())
