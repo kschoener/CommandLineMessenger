@@ -6,7 +6,6 @@ myData = None
 
 commands = [
     'conversations',
-    'conv',
     'open',
     'refresh',
     'send',
@@ -57,7 +56,7 @@ def check(com):
 #enddef check
 
 def doSomething(com):
-    if com == 'conversations' or com == 'conv':
+    if com == 'conversations':
         for openConv in myData.getOpenConversations():
             print(openConv)
     elif com == 'open':
