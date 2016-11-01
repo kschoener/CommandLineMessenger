@@ -4,11 +4,13 @@ import DataRetrieval as data
 
 myData = None
 
+#the idea of secretsend is that the text wont display
 commands = [
     'conversations',
     'open',
     'refresh',
     'send',
+    'secretsend'
 ]
 
 def main():

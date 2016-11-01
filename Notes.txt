@@ -1,2 +1,4 @@
 This allows a bash script to be executed:
 chmod u+x program_name
+
+spent a lot of time working with requests but I kept getting a 405 error (method not allowed)

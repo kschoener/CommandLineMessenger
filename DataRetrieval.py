@@ -3,8 +3,11 @@ import json
 import getpass
 # import requests #http://docs.python-requests.org/en/master/
 # import urllib.request as urllib
-import urllib.request as request
-import urllib.parse as parse
+# import urllib.request as request
+# import urllib.parse as parse
+
+import requests
+from lxml import html
 
 '''
 Default Chats HTML:
@@ -26,29 +29,86 @@ url = 'https://www.discordapp.com/channels/@me'
 username = None
 password = None
 
-headers = {
-    'authority':'discordapp.com',
-    'method':'POST',
-    'path':'/api/v6/auth/login',
-    'scheme':'https',
-    'accept':'*/*',
-    'accept-language':'en-US',
-    'content-length':'56',
-    'content-type':'application/json',
-    'accept-encoding':['gzip', 'deflate', 'br'],
-    'origin':'https://discordapp.com',
-    'referer':'https://discordapp.com/login',
-    'x-super-properties':'eyJvcyI6Ik1hYyBPUyBYIiwiYnJvd3NlciI6IkNocm9tZSIsImRldmljZSI6IiIsInJlZmVycmVyIjoiIiwicmVmZXJyaW5nX2RvbWFpbiI6IiJ9',
-    'user-agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
-    # 'cookie':'__cfduid=dd395bc5c79b8f56bf78296a8f110e9e01476856868'
-    }
+# login_url = "https://discordapp.com/login"
+login_url = "https://discordapp.com/channels/@me"
 
+session_requests = None
+# loginheaders = {
+#     'authority':'discordapp.com',
+#     'method':'POST',
+#     'path':'/api/v6/auth/login',
+#     'scheme':'https',
+#     'accept':'*/*',
+#     'accept-language':'en-US',
+#     'content-length':'56',
+#     'content-type':'application/json',
+#     'accept-encoding':['gzip', 'deflate', 'br'],
+#     'origin':'https://discordapp.com',
+#     'referer':'https://discordapp.com/login',
+#     'x-super-properties':'eyJvcyI6Ik1hYyBPUyBYIiwiYnJvd3NlciI6IkNocm9tZSIsImRldmljZSI6IiIsInJlZmVycmVyIjoiIiwicmVmZXJyaW5nX2RvbWFpbiI6IiJ9',
+#     'user-agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36'
+# }
+# 'cookie':'__cfduid=dd395bc5c79b8f56bf78296a8f110e9e01476856868'
 def main():
     global username
     global password
     username = 'nunya'
     password = 'business'
+    username = input('Enter Username: ')
+    password = getpass.getpass(prompt='Enter Password: ')
+    login()
+    skipChangeLog()
+    checkLogin("https://discordapp.com/channels/@me")
+    checkLogin("https://discordapp.com/channels/226749461374828545/226749461374828545")
 #enddef main
+
+def skipChangeLog():
+    meUrl = "https://discordapp.com/channels/@me"
+    post = {
+        "event" : "Change Log Closed",
+        "properties" : {
+            "seconds_open": 254,
+            "max_scrolled_percentage": 0
+        },
+        "token" : "MjExMzIzMTQ3NDY5ODQ4NTg2.0H1wzplzHd4mb_yfW2IAzCSV3JA"
+    }
+    changeLogResult = session_requests.post(
+        meUrl,
+        data=post,
+        headers=dict(referer=meUrl)
+    )
+    print("The skip change result is:\n"+str(changeLogResult.content))
+    print("\n\n\n")
+#enddef skipChangeLog
+
+
+def checkLogin(check_url):
+    print("Check url is: "+ check_url)
+    checkResult = session_requests.get(
+        check_url,
+        headers=dict(referer=check_url)
+    )
+    print("Was the result okay? "+str(checkResult.ok).strip())
+    print("Status code from login: "+str(checkResult.status_code).strip())
+    print("The html is:\n"+str(checkResult.content).strip())
+    print("\n\n\n")
+#enddef checkLogin
+
+def login():
+    global session_requests
+    session_requests = requests.session()
+    loginPage = session_requests.get(login_url)
+    loginresult = session_requests.post(
+        login_url,
+        data={"email": username, "password": password},
+        headers=dict(referer=login_url)
+    )
+    print("Was the result okay? "+str(loginresult.ok).strip())
+    print("Status code from login: "+str(loginresult.status_code).strip())
+    print("Html is:\n"+str(loginresult.content))
+    print("\n\n\n")
+
+#enddef login
 
 def getOpenConversations():
     conversations = []
@@ -72,6 +132,71 @@ def getUsername():
     return username
 def getPassword():
     return password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def main():
 #     # getCreds()
